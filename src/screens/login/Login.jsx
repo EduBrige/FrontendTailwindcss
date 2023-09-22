@@ -7,12 +7,16 @@ import { useNavigate } from "react-router-dom";
 import Image from "./logo.png";
 import Text from "./Text.png";
 import Google from "./google.png";
+import { useSelector, useDispatch } from 'react-redux'
+import { updateUser } from '../../../features/login/loginSlice'
 
 const clientID =
   "475571030013-rdh3gqg428p2mbtgcps3vvqm0sdslcib.apps.googleusercontent.com";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     function start() {
@@ -25,10 +29,26 @@ const Login = () => {
     gapi.load("client:auth2", start);
   });
 
-  const onSuccess = (e) => {
-    console.log("Logged In");
-    console.log(e.profileObj.email);
-    navigate("/");
+  const onSuccess = async (e) => {
+    let data = await fetch('https://127.0.0.1:8000/api/login/', {
+      headers: {
+        "Content Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: state.email,
+        name: state.name
+      })
+    })
+    data = data.json()
+    if (data.exists === true) {
+      console.log("Logged In");
+      console.log(e.profileObj.email);
+      dispatch(dispatch(updateUser({ email: e.profileObj.email, name: e.profileObj.name })))
+      navigate("/");
+    }
+    else {
+      console.log("Account already exists!")
+    }
   };
 
   const onFailure = () => {
@@ -58,6 +78,7 @@ const Login = () => {
           <div>
             <img src={Text} className="h-28" />
           </div>
+<<<<<<< HEAD
           <div className="flex flex-col gap-3 mt-10">
             <input placeholder="Email" className="border-2  w-64 px-2 py-1 border-gray-200 rounded-md " />
          
@@ -65,6 +86,28 @@ const Login = () => {
             <button  className="bg-blue-500 py-1 rounded-md">Login</button>
             <a href="/studentprofile" className="underline text-blue-400">Don't have an account ? Sign In</a>
           </div>
+=======
+          <GoogleLogin
+            render={
+              (r) => <div onClick={() => r.onClick()} className="bg-red-100 mt-10  flex text-lg rounded-md items-center hover:bg-red-200 px-5 transition duration-300 ease-in-out cursor-pointer">
+                <div>
+                  <img src={Google} className="h-12" />
+
+                </div>
+                <p className="font-semibold ml-5 mr-10">Continue With Google</p>
+
+              </div>
+
+            }
+            clientId={clientID}
+            buttonText="Continue With Google"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={'none'}
+
+          />
+
+>>>>>>> 4b43455757e5781c937c279ae9eaeb98f433346e
         </div>
       </div>
     </div>
