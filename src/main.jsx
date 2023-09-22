@@ -15,7 +15,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route exact path="/" element={<App />} />
-
+          <Route path='/studentprofile' element={<StudentProfile />} />
+          <Route path="/facultyprofile" element={<FacultyProfile />} />
         </Routes>
       </BrowserRouter>
     </Provider>
