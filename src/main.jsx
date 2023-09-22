@@ -5,6 +5,8 @@ import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./screens/login/Login";
 import './index.css'
+import StudentProfile from "./screens/studentProfile/StudentProfile";
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -12,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route exact path="/" element={<App />} />
-       
+        <Route path='/studentprofile' element={<StudentProfile/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
