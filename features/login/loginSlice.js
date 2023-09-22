@@ -12,7 +12,10 @@ export const loginSlice = createSlice({
         updateUser: (state, action) => {
             state.email = action.payload.email
             state.name = action.payload.name
-        }
+
+
+        },
+
     }
 })
 

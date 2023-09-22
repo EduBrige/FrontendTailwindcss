@@ -29,11 +29,26 @@ const Login = () => {
     gapi.load("client:auth2", start);
   });
 
-  const onSuccess = (e) => {
-    console.log("Logged In");
-    console.log(e.profileObj.email);
-    dispatch(dispatch(updateUser({ email: e.profileObj.email, name: e.profileObj.name })))
-    navigate("/");
+  const onSuccess = async (e) => {
+    let data = await fetch('https://127.0.0.1:8000/api/login/', {
+      headers: {
+        "Content Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: state.email,
+        name: state.name
+      })
+    })
+    data = data.json()
+    if (data.exists === true) {
+      console.log("Logged In");
+      console.log(e.profileObj.email);
+      dispatch(dispatch(updateUser({ email: e.profileObj.email, name: e.profileObj.name })))
+      navigate("/");
+    }
+    else {
+      console.log("Account already exists!")
+    }
   };
 
   const onFailure = () => {

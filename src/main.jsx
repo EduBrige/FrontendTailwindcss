@@ -7,9 +7,10 @@ import Login from "./screens/login/Login";
 import './index.css'
 import { store } from '../app/store';
 import { Provider } from 'react-redux'
-
+import StudentProfile from "./screens/studentProfile/StudentProfile";
+import FacultyProfile from "./screens/facultyProfile/facultyProfile";
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <>
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
@@ -20,5 +21,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </Routes>
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
+  </>
 )
