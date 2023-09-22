@@ -7,12 +7,16 @@ import { useNavigate } from "react-router-dom";
 import Image from "./logo.png";
 import Text from "./Text.png";
 import Google from "./google.png";
+import { useSelector, useDispatch } from 'react-redux'
+import { updateUser } from '../../../features/login/loginSlice'
 
 const clientID =
   "69507285508-3eom95gbihjmdrpdfe10aciuktu7oup2.apps.googleusercontent.com";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     function start() {
@@ -28,6 +32,7 @@ const Login = () => {
   const onSuccess = (e) => {
     console.log("Logged In");
     console.log(e.profileObj.email);
+    dispatch(dispatch(updateUser({ email: e.profileObj.email, name: e.profileObj.name })))
     navigate("/");
   };
 
@@ -60,24 +65,24 @@ const Login = () => {
           </div>
           <GoogleLogin
             render={
-               (r) => <div onClick={() => r.onClick()} className="bg-red-100 mt-10  flex text-lg rounded-md items-center hover:bg-red-200 px-5 transition duration-300 ease-in-out cursor-pointer">
-               <div>
-               <img src={Google} className="h-12"/>
-               
-               </div>
-               <p className="font-semibold ml-5 mr-10">Continue With Google</p>
-               
-             </div>
-               
-            }
-                clientId={clientID}
-                buttonText="Continue With Google"
-                onSuccess={onSuccess}
-                onFailure={onFailure}
-                cookiePolicy={'none'}
+              (r) => <div onClick={() => r.onClick()} className="bg-red-100 mt-10  flex text-lg rounded-md items-center hover:bg-red-200 px-5 transition duration-300 ease-in-out cursor-pointer">
+                <div>
+                  <img src={Google} className="h-12" />
 
-            />
-          
+                </div>
+                <p className="font-semibold ml-5 mr-10">Continue With Google</p>
+
+              </div>
+
+            }
+            clientId={clientID}
+            buttonText="Continue With Google"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={'none'}
+
+          />
+
         </div>
       </div>
     </div>
