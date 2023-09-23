@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "./Avatar.png";
 
 const StudentProfile = () => {
+  const navigate = useNavigate();
   const [imagePreview, setImagePreview] = useState(null);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -17,7 +19,7 @@ const StudentProfile = () => {
   };
   return (
     <div className="h-screen bg-gray-200 p-10">
-      <div className="bg-gray-50 p-5 flex flex-col gap-8 rounded-md relative">
+      <div className="bg-gray-50 p-5 flex flex-col gap-4 rounded-md relative">
         <div className="absolute right-10 flex flex-col gap-5 items-center">
           <div className="">
             <img className="h-48 object-cover" src={imagePreview || Avatar} />
@@ -70,25 +72,24 @@ const StudentProfile = () => {
             className="border border-gray-300 rounded-md text-lg px-2 py-1"
           />
         </div>
-        <div className=" flex w-full justify-between">
-          <div className="flex w-96 justify-between  items-center my-2">
-            <span className="text-semibold text-lg">Program :</span>
-            <input
-              type="text"
-              placeholder="enter your college program"
-              className="border border-gray-300 rounded-md text-lg px-2 py-1"
-            />
-          </div>
-          <div className="flex w-96  justify-between  items-center my-2">
-            <span className="text-semibold text-lg">Major :</span>
-            <input
-              placeholder="enter your major"
-              type="text"
-              className="border border-gray-300 rounded-md text-lg px-2 py-1"
-            />
-          </div>
+        <div className="flex w-96  justify-between  items-center my-2">
+          <span className="text-semibold text-lg">Program :</span>
+          <input
+            placeholder="enter valid email id"
+            type="text"
+            className="border border-gray-300 rounded-md text-lg px-2 py-1"
+          />
         </div>
-        <div className="flex w-10/12    justify-between  items-center gap-8 my-2">
+        <div className="flex w-96  justify-between  items-center my-2">
+          <span className="text-semibold text-lg">Major :</span>
+          <input
+            placeholder="enter valid email id"
+            type="text"
+            className="border border-gray-300 rounded-md text-lg px-2 py-1"
+          />
+        </div>
+       
+        <div className="flex w-10/12    justify-between  items-center gap-24 my-2">
           <span className="text-semibold text-lg">Interests:</span>
           <input
             placeholder="enter your interests separated by a comma"
@@ -96,9 +97,12 @@ const StudentProfile = () => {
             className="border border-gray-300 w-full rounded-md text-lg px-2 py-1"
           />
         </div>
-        <div className="flex  justify-center ">
-        <button className="pointer-cursor bg-blue-400 px-2 py-1 rounded-md ">SUBMIT</button>
+        <div className="flex flex-col items-center    justify-center ">
+
+        <div><button onClick={() => navigate('/') } className="pointer-cursor bg-blue-400 px-2 py-1 rounded-md ">SUBMIT</button></div>
+        <a href="/facultyprofile" className="underline text-blue-400">Are you a faculty ?</a>
         </div>
+        
       </div>
     </div>
   );

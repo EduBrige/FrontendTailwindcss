@@ -1,6 +1,5 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Plus from "./assets/plus.png";
@@ -8,7 +7,7 @@ import Perc75 from "./assets/75.png";
 import Perc62 from "./assets/62.png";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -16,7 +15,7 @@ function App() {
       <section className="py-10 px-24">
         <div className="flex justify-between">
           <p className="font-semibold text-3xl">CURRENT PROJECTS</p>
-          <button className="flex gap-2 border border-black px-2 py-1 rounded-md mb-5">
+          <button onClick={() => navigate('/studentCreate')} className="flex gap-2 border border-black px-2 py-1 rounded-md mb-5">
             <img className="h-6" src={Plus} />
             <p>Create Project</p>
           </button>

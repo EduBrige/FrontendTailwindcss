@@ -1,8 +1,4 @@
-import { useEffect } from "react";
-import { Box, Container, Typography, Button } from "@mui/material";
-import GoogleLogin from "react-google-login";
-import { gapi } from "gapi-script";
-import { grey, red } from "@mui/material/colors";
+
 import { useNavigate } from "react-router-dom";
 import Image from "./logo.png";
 import Text from "./Text.png";
@@ -18,16 +14,6 @@ const Login = () => {
   const dispatch = useDispatch()
 
 
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientID: clientID,
-        scope: "",
-      });
-    }
-
-    gapi.load("client:auth2", start);
-  });
 
   const onSuccess = async (e) => {
     let data = await fetch('https://127.0.0.1:8000/api/login/', {
@@ -78,36 +64,15 @@ const Login = () => {
           <div>
             <img src={Text} className="h-28" />
           </div>
-<<<<<<< HEAD
+
           <div className="flex flex-col gap-3 mt-10">
             <input placeholder="Email" className="border-2  w-64 px-2 py-1 border-gray-200 rounded-md " />
          
-            <input placeholder="Password" className="border-2 w-64 px-2 py-1 border-gray-200 rounded-md  " />
-            <button  className="bg-blue-500 py-1 rounded-md">Login</button>
+            <input placeholder="Password" type="password" className="border-2 w-64 px-2 py-1 border-gray-200 rounded-md  " />
+            <button onClick={() => navigate('/') }  className="bg-blue-500 py-1 rounded-md">Login</button>
             <a href="/studentprofile" className="underline text-blue-400">Don't have an account ? Sign In</a>
           </div>
-=======
-          <GoogleLogin
-            render={
-              (r) => <div onClick={() => r.onClick()} className="bg-red-100 mt-10  flex text-lg rounded-md items-center hover:bg-red-200 px-5 transition duration-300 ease-in-out cursor-pointer">
-                <div>
-                  <img src={Google} className="h-12" />
 
-                </div>
-                <p className="font-semibold ml-5 mr-10">Continue With Google</p>
-
-              </div>
-
-            }
-            clientId={clientID}
-            buttonText="Continue With Google"
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-            cookiePolicy={'none'}
-
-          />
-
->>>>>>> 4b43455757e5781c937c279ae9eaeb98f433346e
         </div>
       </div>
     </div>
